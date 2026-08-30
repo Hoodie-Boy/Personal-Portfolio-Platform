@@ -7,11 +7,15 @@ __pycache__/
 .venv/
 venv/
 env/
+.linux_venv/
 
 # Django
 db.sqlite3
 media/
 staticfiles/
+
+# Django media
+backend/media/
 
 # Environment variables
 .env

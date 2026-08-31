@@ -1,3 +1,19 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .models import Profile, SocialLink
+from .serializers import (
+    ProfileSerializer,
+    SocialLinkSerializer,
+)
+
+
+class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+class SocialLinkViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = SocialLink.objects.filter(
+        visible=True
+    )
+    serializer_class = SocialLinkSerializer

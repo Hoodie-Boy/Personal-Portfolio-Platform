@@ -20,6 +20,8 @@ class TechnologySerializer(serializers.ModelSerializer):
 
 
 class ProjectImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = ProjectImage
         fields = [
@@ -30,8 +32,23 @@ class ProjectImageSerializer(serializers.ModelSerializer):
             "order",
         ]
 
+    def get_image(self, obj):
+        request = self.context.get("request")
+
+        if not obj.image:
+            return None
+
+        url = obj.image.url
+
+        if request:
+            return request.build_absolute_uri(url)
+
+        return url
 
 class ProjectVideoSerializer(serializers.ModelSerializer):
+    video_file = serializers.SerializerMethodField()
+    thumbnail = serializers.SerializerMethodField()
+
     class Meta:
         model = ProjectVideo
         fields = [
@@ -45,8 +62,36 @@ class ProjectVideoSerializer(serializers.ModelSerializer):
             "order",
         ]
 
+    def get_video_file(self, obj):
+        request = self.context.get("request")
+
+        if not obj.video_file:
+            return None
+
+        url = obj.video_file.url
+
+        if request:
+            return request.build_absolute_uri(url)
+
+        return url
+
+    def get_thumbnail(self, obj):
+        request = self.context.get("request")
+
+        if not obj.thumbnail:
+            return None
+
+        url = obj.thumbnail.url
+
+        if request:
+            return request.build_absolute_uri(url)
+
+        return url
+
 
 class ProjectSerializer(serializers.ModelSerializer):
+    thumbnail = serializers.SerializerMethodField()
+
     technologies = TechnologySerializer(
         many=True,
         read_only=True,
@@ -62,6 +107,43 @@ class ProjectSerializer(serializers.ModelSerializer):
         read_only=True,
     )
 
+    class Meta:
+        model = Project
+
+        fields = [
+            "id",
+            "title",
+            "slug",
+            "short_description",
+            "description",
+            "project_type",
+            "status",
+            "start_date",
+            "end_date",
+            "featured",
+            "github_url",
+            "demo_url",
+            "thumbnail",
+            "technologies",
+            "images",
+            "videos",
+            "created_at",
+            "updated_at",
+        ]
+
+    def get_thumbnail(self, obj):
+        request = self.context.get("request")
+
+        if not obj.thumbnail:
+            return None
+
+        url = obj.thumbnail.url
+
+        if request:
+            return request.build_absolute_uri(url)
+
+        return url
+    
     class Meta:
         model = Project
         fields = [

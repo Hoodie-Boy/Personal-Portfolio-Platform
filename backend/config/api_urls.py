@@ -1,7 +1,8 @@
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from apps.core.views import (
-    ProfileViewSet,
+    ProfileView,
     SocialLinkViewSet,
 )
 
@@ -26,16 +27,18 @@ router.register(
 )
 
 router.register(
-    "profile",
-    ProfileViewSet,
-    basename="profile",
-)
-
-router.register(
     "social-links",
     SocialLinkViewSet,
     basename="social-link",
 )
 
 
-urlpatterns = router.urls
+urlpatterns = [
+    path(
+        "profile/",
+        ProfileView.as_view(),
+        name="profile",
+    ),
+]
+
+urlpatterns += router.urls

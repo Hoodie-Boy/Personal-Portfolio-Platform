@@ -1,5 +1,6 @@
 asgiref==3.12.1
 Django==6.1
+django-filter==26.1
 djangorestframework==3.18.0
 pillow==12.3.0
 psycopg==3.3.4

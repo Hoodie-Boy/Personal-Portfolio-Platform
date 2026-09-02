@@ -53,6 +53,28 @@ export async function getProject(
   return response.json();
 }
 
+export async function getFeaturedProjects(): Promise<
+  Project[]
+> {
+  const response = await fetch(
+    `${API_URL}/projects/?featured=true`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      "Failed to fetch featured projects"
+    );
+  }
+
+  const data = await response.json();
+
+  return data.results;
+}
 
 export async function getTechnologies(): Promise<
   Technology[]

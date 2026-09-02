@@ -1,29 +1,21 @@
-import { getProject } from "@/lib/api";
+import CTA from "@/components/CTA";
+import FeaturedProjects from "@/components/FeaturedProjects";
+import FocusAreas from "@/components/FocusAreas";
+import Hero from "@/components/Hero";
+import Technologies from "@/components/Technologies";
 
-interface ProjectPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
-
-export default async function ProjectPage({
-  params,
-}: ProjectPageProps) {
-  const { slug } = await params;
-
-  const project = await getProject(slug);
-
+export default function HomePage() {
   return (
-    <main>
-      <h1>{project.title}</h1>
+    <>
+      <Hero />
 
-      <p>{project.short_description}</p>
+      <FeaturedProjects />
 
-      <p>{project.description}</p>
+      <FocusAreas />
 
-      <p>
-        Status: {project.status}
-      </p>
-    </main>
+      <Technologies />
+
+      <CTA />
+    </>
   );
 }

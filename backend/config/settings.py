@@ -45,10 +45,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_filters",
+
     "rest_framework",
+    "django_filters",
+
     "apps.core",
     "apps.projects",
+    "portfolio"
 ]
 
 REST_FRAMEWORK = {
@@ -99,10 +102,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB"),
-        "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": os.getenv("POSTGRES_HOST", "db"),
+        "NAME": os.getenv("POSTGRES_DB", "portfolio"),
+        "USER": os.getenv("POSTGRES_USER", "portfolio_user"),
+        "PASSWORD": os.getenv(
+            "POSTGRES_PASSWORD",
+            "portfolio_password",
+        ),
+        "HOST": os.getenv("POSTGRES_HOST", "localhost"),
         "PORT": os.getenv("POSTGRES_PORT", "5432"),
     }
 }

@@ -51,7 +51,6 @@ INSTALLED_APPS = [
 
     "apps.core",
     "apps.projects",
-    "portfolio"
 ]
 
 REST_FRAMEWORK = {

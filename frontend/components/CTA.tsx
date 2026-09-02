@@ -14,16 +14,15 @@ export default function CTA() {
           </h2>
 
           <p className="mt-6 text-lg leading-8 text-[var(--muted)]">
-            I'm interested in building practical systems
-            that combine engineering, electronics, and
-            software.
+            I&apos;m interested in building practical systems
+            that combine engineering, electronics, and software.
           </p>
 
           <Link
             href="/about"
             className="mt-8 inline-block rounded-lg bg-[var(--foreground)] px-6 py-3 text-sm font-medium text-[var(--background)] transition hover:opacity-80"
           >
-            Let's connect →
+            Let&apos;s connect →
           </Link>
         </div>
       </div>

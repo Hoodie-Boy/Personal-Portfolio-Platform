@@ -26,8 +26,10 @@ export interface ProjectVideo {
 
 export interface Project {
   id: number;
+
   title: string;
   slug: string;
+
   short_description: string;
   description: string;
 
@@ -54,22 +56,28 @@ export interface Project {
 
 export interface Profile {
   id: number;
+
   name: string;
   headline: string;
   bio: string;
+
   location: string;
   email: string;
+
   profile_image: string | null;
   resume: string | null;
+
   created_at: string;
   updated_at: string;
 }
 
 export interface SocialLink {
   id: number;
+
   platform: string;
   url: string;
   icon: string;
+
   order: number;
   visible: boolean;
 }

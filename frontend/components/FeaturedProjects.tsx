@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-// import ProjectCard from "@/components/ProjectCard";
+import ProjectCard from "@/components/ProjectCard";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
 
@@ -26,14 +26,14 @@ export default async function FeaturedProjects() {
         </Link>
       </div>
 
-      {/* <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
           <ProjectCard
             key={project.id}
             project={project}
           />
         ))}
-      </div> */}
+      </div>
     </Section>
   );
 }

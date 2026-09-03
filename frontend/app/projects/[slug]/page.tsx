@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getProject } from "@/lib/api";
 import ProjectMeta from "@/components/ProjectMeta";
 import ProjectTechnologies from "@/components/ProjectTechnologies";
+import ProjectGallery from "@/components/ProjectGallery";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -108,6 +109,11 @@ export default async function ProjectPage({
         <p className="mt-5 max-w-4xl whitespace-pre-line leading-8 text-[var(--muted)]">
           {project.description}
         </p>
+      </section>
+      
+      {/* Project Gallery */}
+      <section className="mt-16 border-t border-[var(--border)] pt-12">
+        <ProjectGallery project={project} />
       </section>
 
       {/* Technologies */}

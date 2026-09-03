@@ -4,6 +4,7 @@ import { getProject } from "@/lib/api";
 import ProjectMeta from "@/components/ProjectMeta";
 import ProjectTechnologies from "@/components/ProjectTechnologies";
 import ProjectGallery from "@/components/ProjectGallery";
+import ProjectVideos from "@/components/ProjectVideos";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -110,12 +111,17 @@ export default async function ProjectPage({
           {project.description}
         </p>
       </section>
-      
+
       {/* Project Gallery */}
       <section className="mt-16 border-t border-[var(--border)] pt-12">
         <ProjectGallery project={project} />
       </section>
-
+      
+      {/* Project Videos */}
+      <section className="mt-16 border-t border-[var(--border)] pt-12">
+        <ProjectVideos project={project} />
+      </section>
+      
       {/* Technologies */}
       <section className="mt-16 border-t border-[var(--border)] pt-12">
         <ProjectTechnologies project={project} />

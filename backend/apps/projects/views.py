@@ -15,7 +15,7 @@ class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
             "images",
             "videos",
         )
-        .all()
+        .order_by("-created_at")
     )
 
     serializer_class = ProjectSerializer

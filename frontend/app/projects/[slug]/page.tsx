@@ -1,15 +1,51 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-
 import { getProject } from "@/lib/api";
 import ProjectMeta from "@/components/ProjectMeta";
 import ProjectTechnologies from "@/components/ProjectTechnologies";
 import ProjectGallery from "@/components/ProjectGallery";
 import ProjectVideos from "@/components/ProjectVideos";
 
+
 interface ProjectPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({
+  params,
+}: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await getProject(slug);
+
+  return {
+    title: `${project.title} | Portfolio`,
+    description: project.short_description,
+
+    openGraph: {
+      title: project.title,
+      description: project.short_description,
+      type: "article",
+      ...(project.thumbnail && {
+        images: [
+          {
+            url: project.thumbnail,
+            alt: project.title,
+          },
+        ],
+      }),
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.short_description,
+      ...(project.thumbnail && {
+        images: [project.thumbnail],
+      }),
+    },
+  };
 }
 
 export default async function ProjectPage({
@@ -30,6 +66,7 @@ export default async function ProjectPage({
 
       {/* Hero */}
       <section className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        {/* Hero content */}
         <div>
           {/* Type + Status */}
           <div className="flex flex-wrap items-center gap-3 text-sm">
@@ -60,9 +97,10 @@ export default async function ProjectPage({
                   href={project.github_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg border border-[var(--border)] px-5 py-2.5 text-sm font-medium transition-colors hover:bg-[var(--surface)]"
+                  className="inline-flex items-center rounded-lg border border-[var(--border)] px-5 py-2.5 text-sm font-medium transition-colors hover:bg-[var(--surface)]"
                 >
-                  View on GitHub ↗
+                  View on GitHub
+                  <span className="ml-2">↗</span>
                 </a>
               )}
 
@@ -71,9 +109,10 @@ export default async function ProjectPage({
                   href={project.demo_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg bg-[var(--foreground)] px-5 py-2.5 text-sm font-medium text-[var(--background)] transition-opacity hover:opacity-80"
+                  className="inline-flex items-center rounded-lg bg-[var(--foreground)] px-5 py-2.5 text-sm font-medium text-[var(--background)] transition-opacity hover:opacity-80"
                 >
-                  Live Demo ↗
+                  Live Demo
+                  <span className="ml-2">↗</span>
                 </a>
               )}
             </div>
@@ -82,11 +121,11 @@ export default async function ProjectPage({
 
         {/* Thumbnail */}
         {project.thumbnail && (
-          <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
+          <div className="group overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)]">
             <img
               src={project.thumbnail}
               alt={`${project.title} thumbnail`}
-              className="aspect-video w-full object-cover"
+              className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
         )}
@@ -113,19 +152,25 @@ export default async function ProjectPage({
       </section>
 
       {/* Project Gallery */}
-      <section className="mt-16 border-t border-[var(--border)] pt-12">
-        <ProjectGallery project={project} />
-      </section>
-      
+      {project.images.length > 0 && (
+        <section className="mt-16 border-t border-[var(--border)] pt-12">
+          <ProjectGallery project={project} />
+        </section>
+      )}
+
       {/* Project Videos */}
-      <section className="mt-16 border-t border-[var(--border)] pt-12">
-        <ProjectVideos project={project} />
-      </section>
-      
+      {project.videos.length > 0 && (
+        <section className="mt-16 border-t border-[var(--border)] pt-12">
+          <ProjectVideos project={project} />
+        </section>
+      )}
+
       {/* Technologies */}
-      <section className="mt-16 border-t border-[var(--border)] pt-12">
-        <ProjectTechnologies project={project} />
-      </section>
+      {project.technologies.length > 0 && (
+        <section className="mt-16 border-t border-[var(--border)] pt-12">
+          <ProjectTechnologies project={project} />
+        </section>
+      )}
     </main>
   );
 }

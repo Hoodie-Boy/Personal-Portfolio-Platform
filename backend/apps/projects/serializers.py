@@ -23,13 +23,26 @@ class ProjectImageSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
 
     class Meta:
-        model = ProjectImage
+        model = Project
         fields = [
             "id",
-            "image",
-            "caption",
-            "alt_text",
-            "order",
+            "title",
+            "slug",
+            "short_description",
+            "description",
+            "project_type",
+            "status",
+            "start_date",
+            "end_date",
+            "featured",
+            "github_url",
+            "demo_url",
+            "thumbnail",
+            "technologies",
+            "images",
+            "videos",
+            "created_at",
+            "updated_at",
         ]
 
     def get_image(self, obj):

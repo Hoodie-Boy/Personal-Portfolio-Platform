@@ -23,26 +23,14 @@ class ProjectImageSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
 
     class Meta:
-        model = Project
+        model = ProjectImage
         fields = [
             "id",
-            "title",
-            "slug",
-            "short_description",
-            "description",
-            "project_type",
-            "status",
-            "start_date",
-            "end_date",
-            "featured",
-            "github_url",
-            "demo_url",
-            "thumbnail",
-            "technologies",
-            "images",
-            "videos",
+            "image",
+            "caption",
+            "alt_text",
+            "order",
             "created_at",
-            "updated_at",
         ]
 
     def get_image(self, obj):
@@ -57,6 +45,7 @@ class ProjectImageSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(url)
 
         return url
+
 
 class ProjectVideoSerializer(serializers.ModelSerializer):
     video_file = serializers.SerializerMethodField()
@@ -122,7 +111,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-
         fields = [
             "id",
             "title",
@@ -156,26 +144,3 @@ class ProjectSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(url)
 
         return url
-    
-    class Meta:
-        model = Project
-        fields = [
-            "id",
-            "title",
-            "slug",
-            "short_description",
-            "description",
-            "project_type",
-            "status",
-            "start_date",
-            "end_date",
-            "featured",
-            "github_url",
-            "demo_url",
-            "thumbnail",
-            "technologies",
-            "images",
-            "videos",
-            "created_at",
-            "updated_at",
-        ]

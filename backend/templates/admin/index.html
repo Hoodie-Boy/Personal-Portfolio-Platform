@@ -1,0 +1,80 @@
+{% extends "admin/index.html" %}
+
+{% block extrastyle %}
+{{ block.super }}
+
+<style>
+    .portfolio-welcome-box {
+        position: fixed;
+        top: 80px;
+        right: 25px;
+        width: 280px;
+        padding: 20px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        z-index: 1000;
+    }
+
+    .portfolio-welcome-box h2 {
+        margin-top: 0;
+        margin-right: 25px;
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .portfolio-welcome-box p {
+        margin-bottom: 0;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    .portfolio-welcome-close {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        border: none;
+        background: transparent;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+        color: #777;
+    }
+
+    .portfolio-welcome-close:hover {
+        color: #000;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<div class="portfolio-welcome-box" id="portfolioWelcomeBox">
+    <button
+        type="button"
+        class="portfolio-welcome-close"
+        id="portfolioWelcomeClose"
+        aria-label="Close"
+    >
+        &times;
+    </button>
+
+    <h2>👋 Welcome to my Portfolio CMS</h2>
+
+    <p>
+        Manage your profile, projects, technologies,
+        images, videos, and social links from here.
+    </p>
+</div>
+
+<script>
+    const welcomeBox = document.getElementById("portfolioWelcomeBox");
+    const closeButton = document.getElementById("portfolioWelcomeClose");
+
+    closeButton.addEventListener("click", function () {
+        welcomeBox.style.display = "none";
+    });
+</script>
+{% endblock %}

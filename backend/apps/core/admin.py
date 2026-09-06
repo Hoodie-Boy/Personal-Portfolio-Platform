@@ -9,8 +9,57 @@ class ProfileAdmin(admin.ModelAdmin):
         "name",
         "headline",
         "email",
+        "location",
         "updated_at",
     )
+
+    fieldsets = (
+        (
+            "Personal Information",
+            {
+                "fields": (
+                    "name",
+                    "headline",
+                    "bio",
+                    "location",
+                )
+            },
+        ),
+        (
+            "Contact",
+            {
+                "fields": (
+                    "email",
+                )
+            },
+        ),
+        (
+            "Media",
+            {
+                "fields": (
+                    "profile_image",
+                    "resume",
+                )
+            },
+        ),
+        (
+            "Metadata",
+            {
+                "fields": (
+                    "created_at",
+                    "updated_at",
+                )
+            },
+        ),
+    )
+
+    readonly_fields = (
+        "created_at",
+        "updated_at",
+    )
+
+    def has_add_permission(self, request):
+        return not Profile.objects.exists()
 
 
 @admin.register(SocialLink)
@@ -22,9 +71,23 @@ class SocialLinkAdmin(admin.ModelAdmin):
         "order",
     )
 
+    list_display_links = (
+        "platform",
+    )
+
+    list_editable = (
+        "visible",
+        "order",
+    )
+
     list_filter = (
         "platform",
         "visible",
+    )
+
+    search_fields = (
+        "url",
+        "icon",
     )
 
     ordering = (

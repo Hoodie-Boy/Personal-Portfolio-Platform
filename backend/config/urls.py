@@ -2,6 +2,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib import admin
+
+
+
+admin.site.site_url = "http://localhost:3000/"
+admin.site.site_title = "Portfolio Admin"
+admin.site.index_title = "Portfolio Management"
 
 
 urlpatterns = [
